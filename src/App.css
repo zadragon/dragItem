@@ -1,0 +1,28 @@
+.container{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    padding: 16px;
+    box-sizing: border-box;
+}
+.outter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid #eee;
+    max-width: 400px;
+    width:100vw;
+    height:100vh;
+    padding: 0vh 32px;
+    box-sizing: border-box;
+    margin:0 auto;
+}
+.outter h1{text-align: center;font-size: 1.5em;margin:0;line-height: 1.4;}
+.outter h1 span{background:#fef5d4;padding:5px 10px;border-radius: 30px}
+.scc-img{
+
+}
+.text-box {padding:10px;margin: 24px 0;border:1px solid #dadafc;border-radius: 30px;width:100%;}
+.outter button{padding: 8px 24px;background: #dadafc;border-radius: 30px;border:#dadafc;}
