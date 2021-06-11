@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 
+import {Route, Switch} from "react-router-dom";
+import {withRouter} from "react-router";
+
 import Start from './Start';
 import Quiz from "./Quiz";
 import Score from "./Score";
@@ -27,16 +30,17 @@ class App extends React.Component{
   render(){
     return (
         <div className="App">
-            {this.state.page === "quiz" && <Quiz list={this.state.list} />}
-            {this.state.page === "start" && <Start name={this.state.name} />}
-            {this.state.page === "score" && <Score name={this.state.name} scoreMsg={this.state.scoreMsg} />}
-            {this.state.page === "message" && <Message name={this.state.name} />}
-            {this.state.page === "ranking" && <Ranking  />}
+            <Switch>
+                <Route path="/" exact component={Start} />
+                <Route path="/quiz" component={Quiz} />
+                <Route path="/message"  component={Message} />
+                <Route path="/ranking"  component={Ranking} />
+            </Switch>
         </div>
     );
   }
 }
 
-//스파르타 숙제 3주차 7분 30초부터
+//스파르타 숙제 3주차 12분 00초부터
 
-export default App;
+export default withRouter(App);
