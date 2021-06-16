@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Score from "./Score";
 import SwipeItem from "./SwipeItem";
-
-
+import Progress from "./Progress";
 import { useSelector, useDispatch } from "react-redux";
 import {addAnswer} from "./redux/modules/quiz";
 
@@ -15,7 +14,6 @@ const Quiz = (props) => {
     const num = answers.length;
 
     const onSwipe = (direction) => {
-        console.log(direction)
         let _answer = direction === "left"? "O" : "X";
 
         if(_answer === quiz[num].answer){
@@ -34,6 +32,7 @@ const Quiz = (props) => {
 
     return (
         <QuizContainer>
+            <Progress />
             <p>
                 <span>{num + 1}번 문제</span>
             </p>

@@ -10,17 +10,27 @@ const ADD_RANK = "rank/ADD_RANK";
 const GET_RANK = "rank/GET_RANK";
 
 const initialState = {
-    user_name: "sdf",
+    user_name: "",
     user_message: "",
     user_score: "",
-    score_text: {
+    score_texts: {
         60: "우린 친구! 앞으로도 더 친하게 지내요! :)",
         80: "우와! 우리는 엄청 가까운 사이!",
         100: "둘도 없는 단짝이에요! :)",
     },
     ranking: [
         { score: 40, name: "임민영", message: "안녕 르탄아!" },
-
+        { score: 40, name: "임민영", message: "안녕 르탄아!" },
+        { score: 40, name: "임민영", message: "안녕 르탄아!" },
+        { score: 40, name: "임민영", message: "안녕 르탄아!" },
+        { score: 40, name: "임민영", message: "안녕 르탄아!" },
+        { score: 40, name: "임민영", message: "안녕 르탄아!" },
+        { score: 40, name: "임민영", message: "안녕 르탄아!" },
+        { score: 40, name: "임민영", message: "안녕 르탄아!" },
+        { score: 40, name: "임민영", message: "안녕 르탄아!" },
+        { score: 40, name: "임민영", message: "안녕 르탄아!" },
+        { score: 40, name: "임민영", message: "안녕 르탄아!" },
+        { score: 40, name: "임민영", message: "안녕 르탄아!" },
     ],
 };
 

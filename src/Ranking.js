@@ -1,30 +1,50 @@
 import React from 'react';
 import styled from 'styled-components';
+import {useSelector, useDispatch} from "react-redux";
+import {resetAnswer} from "./redux/modules/quiz";
 
 const Ranking = (props) => {
+    const dispatch = useDispatch();
+    const _ranking = useSelector((state) => state.rank.ranking);
+
+    // Array 내장 함수 sort로 정렬하자!
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sor
+    const ranking = _ranking.sort((a, b) => {
+        return b.score - a.score
+    })
+
+    console.log(ranking)
     return (
         <RankContainer>
             <Topbar>
                 <p>
-                    <span>{}명</span>의 사람들 중 당신은?
+                    <span>{ranking.length}명</span>의 사람들 중 당신은?
                 </p>
             </Topbar>
 
             <RankWrap>
 
-                <RankItem >
-                    <RankNum>등</RankNum>
-                    <RankUser>
-                        <p>
-                            <b>{}</b>
-                        </p>
-                        <p>{}</p>
-                    </RankUser>
-                </RankItem>
+                {ranking.map((r, idx) => {
+                    return (
+                        <RankItem key={idx} highlight={r.current ? true : false}>
+                            <RankNum>{idx+1}등</RankNum>
+                            <RankUser>
+                                <p>
+                                    <b>{r.name}</b>
+                                </p>
+                                <p>{r.message}</p>
+                            </RankUser>
+                        </RankItem>
+                    )
+                })}
+
 
             </RankWrap>
 
-            <Button>
+            <Button onClick={() => {
+                dispatch(resetAnswer());
+                window.location.href = '/';
+            }}>
                 다시 하기
             </Button>
         </RankContainer>
