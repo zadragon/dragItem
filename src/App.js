@@ -57,5 +57,5 @@ class App extends React.Component {
     }
 }
 
-//스파르타 숙제 3주차 30분 00초부터
+//스파르타 숙제 4주차 1분 00초부터
 export default connect(mapStateTopProps, mapDispatchToProps)(withRouter(App));
