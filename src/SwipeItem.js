@@ -5,9 +5,8 @@ import img from './char_item1.jpg';
 //memo -> 리렌더링을 방어해주는 함수
 const SwipeItem = React.memo(({onSwipe}) => {
     const swipe_div = React.useRef(null);
-
     let swipe_status = "ready";
-    let target_classname = ""
+    let target_classname = "";
     let coordinate = {
         start_x: 0,
         start_y: 0,
@@ -35,8 +34,9 @@ const SwipeItem = React.memo(({onSwipe}) => {
                 ...coordinate,
                 start_x: e.touches[0].clientX,
                 start_y: e.touches[0].clientY,
-            }
-        }
+            };
+        };
+
         const touchEnd = (e) => {
             swipe_status = "touchend";
             target_classname = swipe_div.current.className;

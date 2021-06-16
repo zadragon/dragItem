@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import img from "./char_item1.jpg";
 
 const Message = (props) => {

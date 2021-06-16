@@ -1,42 +1,58 @@
-import React, {useState} from 'react';
-import styled from 'styled-components';
-import TinderCard from 'react-tinder-card';
-import img from './char_item1.jpg';
-
+import React from "react";
+import styled from "styled-components";
+import Score from "./Score";
 import SwipeItem from "./SwipeItem";
 
-const Quiz = (props) => {
 
-    const [num, setNum] = useState(0);
+import { useSelector, useDispatch } from "react-redux";
+import {addAnswer} from "./redux/modules/quiz";
+
+const Quiz = (props) => {
+    const dispatch = useDispatch();
+    const answers = useSelector((state) => state.quiz.answers);
+    const quiz = useSelector((state) => state.quiz.quiz);
+
+    const num = answers.length;
 
     const onSwipe = (direction) => {
-        setNum(num + 1);
+        console.log(direction)
+        let _answer = direction === "left"? "O" : "X";
+
+        if(_answer === quiz[num].answer){
+            // 정답일 경우,
+            dispatch(addAnswer(true));
+        }else{
+            // 오답일 경우,
+            dispatch(addAnswer(false));
+        }
+    }
+
+    if (num > quiz.length -1) {
+        return <Score {...props}/>;
+        // return <div>퀴즈 끝!</div>;
     }
 
     return (
         <QuizContainer>
-            <p><span>{num + 1}번문제</span></p>
-
-            {props.list.map((l, idx) => {
+            <p>
+                <span>{num + 1}번 문제</span>
+            </p>
+            {quiz.map((l, idx) => {
                 if (num === idx) {
-                    return <Question key={idx}>{l.question}</Question>
+                    return <Question key={idx}>{l.question}</Question>;
                 }
             })}
 
             <AnswerZone>
-                <Answer>o</Answer>
-                <Answer>x</Answer>
+                <Answer>{"O "}</Answer>
+                <Answer>{" X"}</Answer>
             </AnswerZone>
 
-            {props.list.map((l, idx) => {
-                if (num === idx) {
-                    return (
-                        <SwipeItem key={idx} onSwipe={onSwipe} />
-                    )
+            {quiz.map((l, idx) => {
+                if (idx === num) {
+                    return <SwipeItem key={idx} onSwipe={onSwipe}/>;
                 }
-
             })}
-
         </QuizContainer>
     );
 };
