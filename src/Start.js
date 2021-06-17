@@ -13,11 +13,7 @@ const Start = (props) => {
             <div className="outter">
                 <img className="scc-img" src={img} alt=""/>
                 <h1>나는 <span>{name}</span>에대해 얼마나 알고있을까</h1>
-                <input ref={input_text} className="text-box" type="text" placeholder="내이름"
-                    onChange={()=>{
-                        console.log(input_text.current.value)
-                    }}
-                />
+                <input ref={input_text} className="text-box" type="text" placeholder="내이름"/>
                 <button type="button" onClick={()=>{
                     //이름 저장
                     dispatch(addUserName(input_text.current.value));

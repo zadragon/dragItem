@@ -1,3 +1,7 @@
+import {firestore} from '../../firebase';
+
+const rank_db = firestore.collection("rank");
+
 // Actions
 
 // 유저 이름을 바꾼다
@@ -8,6 +12,8 @@ const ADD_USER_MESSAGE = "rank/ADD_USER_MESSAGE";
 const ADD_RANK = "rank/ADD_RANK";
 // 랭킹정보를 가져온다
 const GET_RANK = "rank/GET_RANK";
+
+const IS_LOADED = "rank/IS_LOADED";
 
 const initialState = {
     user_name: "",
@@ -32,6 +38,7 @@ const initialState = {
         { score: 40, name: "임민영", message: "안녕 르탄아!" },
         { score: 40, name: "임민영", message: "안녕 르탄아!" },
     ],
+    is_loaded:false,
 };
 
 // Action Creators
@@ -51,6 +58,30 @@ export const getRank = (rank_list) => {
     return { type: GET_RANK, rank_list };
 };
 
+export const isLoaded = (loaded) =>{
+    return {type:IS_LOADED, loaded}
+}
+
+export const getRankFB = () => {
+    return function (dispatch){
+
+        dispatch(isLoaded(false));
+
+        rank_db.get().then((docs) => {
+            let rank_data = [];
+
+            docs.forEach((doc) => {
+                // console.log(doc.data());
+                rank_data = [...rank_data, {id: doc.id, ...doc.data()}];
+            });
+
+            dispatch(getRank(rank_data));
+            dispatch(isLoaded(true));
+
+        })
+    }
+}
+
 // Reducer
 export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
@@ -69,6 +100,10 @@ export default function reducer(state = initialState, action = {}) {
 
         case "rank/GET_RANK": {
             return { ...state, ranking: action.rank_list };
+        }
+
+        case "rank/IS_LOADED":{
+            return {...state, is_loaded: action.loaded};
         }
 
         default:

@@ -8,7 +8,7 @@ const ADD_ANSWER = "quiz/ADD_ANSWER";
 const RESET_ANSWER = "quiz/RESET_ANSWER";
 
 const initialState = {
-    name: "르탄이",
+    name: "메시",
     score_texts: {
         60: "우린 친구! 앞으로도 더 친하게 지내요! :)",
         80: "우와! 우리는 엄청 가까운 사이!",
@@ -16,11 +16,11 @@ const initialState = {
     },
     answers: [],
     quiz: [
-        { question: "르탄이는 1살이다.", answer: "O" },
-        { question: "르탄이는 2살이다.", answer: "O" },
-        { question: "르탄이는 3살이다.", answer: "O" },
-        { question: "르탄이는 4살이다.", answer: "O" },
-        { question: "르탄이는 5살이다.", answer: "O" },
+        { question: "메시의 소속팀은 레알마드리드다.", answer: "X" },
+        { question: "메시는 바르셀로나 유스출신이다.", answer: "O" },
+        { question: "메시의 국적은 한국이다.", answer: "X" },
+        { question: "메시의 키는 170cm 이상이다.", answer: "X" },
+        { question: "메시의 바르셀로나 등번호는 10번이다", answer: "O" },
     ],
 };
 

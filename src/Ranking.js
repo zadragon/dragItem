@@ -2,18 +2,39 @@ import React from 'react';
 import styled from 'styled-components';
 import {useSelector, useDispatch} from "react-redux";
 import {resetAnswer} from "./redux/modules/quiz";
+import {getRankFB} from "./redux/modules/rank";
+import Spinner from "./Spinner";
 
 const Ranking = (props) => {
     const dispatch = useDispatch();
     const _ranking = useSelector((state) => state.rank.ranking);
+    const is_loaded = useSelector((state)=> state.rank.is_loaded);
 
-    // Array 내장 함수 sort로 정렬하자!
+    // 스크롤 이동할 div의 ref를 잡아주기
+    const user_rank = React.useRef(null);
+
+    React.useEffect(()=>{
+        dispatch(getRankFB())
+        if(!user_rank.current){
+            return;
+        }
+        window.scrollTo({
+            top: user_rank.current.offsetTop,
+            left: 0,
+            behavior: "smooth",
+        });
+    });
+
+    // Array 내장 함수 sort로 정렬
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sor
     const ranking = _ranking.sort((a, b) => {
         return b.score - a.score
-    })
+    });
 
-    console.log(ranking)
+    if(!is_loaded){
+        return (<Spinner />);
+    }
+
     return (
         <RankContainer>
             <Topbar>
@@ -25,9 +46,22 @@ const Ranking = (props) => {
             <RankWrap>
 
                 {ranking.map((r, idx) => {
+                    if(r.current){
+                        return (
+                            <RankItem key={idx} highlight={true} ref={user_rank}>
+                                <RankNum>{idx+1}등</RankNum>
+                                <RankUser>
+                                    <p>
+                                        <b>{r.name}</b>
+                                    </p>
+                                    <p>{r.message}</p>
+                                </RankUser>
+                            </RankItem>
+                        )
+                    }
                     return (
-                        <RankItem key={idx} highlight={r.current ? true : false}>
-                            <RankNum>{idx+1}등</RankNum>
+                        <RankItem key={idx}>
+                            <RankNum>{idx + 1}등2</RankNum>
                             <RankUser>
                                 <p>
                                     <b>{r.name}</b>
@@ -35,7 +69,8 @@ const Ranking = (props) => {
                                 <p>{r.message}</p>
                             </RankUser>
                         </RankItem>
-                    )
+                    );
+
                 })}
 
 
