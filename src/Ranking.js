@@ -15,6 +15,7 @@ const Ranking = (props) => {
 
     React.useEffect(()=>{
         dispatch(getRankFB())
+        console.log(_ranking);
         if(!user_rank.current){
             return;
         }
@@ -23,7 +24,7 @@ const Ranking = (props) => {
             left: 0,
             behavior: "smooth",
         });
-    });
+    },[]);
 
     // Array 내장 함수 sort로 정렬
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sor
